@@ -37,4 +37,19 @@ public class ShipController : MonoBehaviour {
         // Rotate the ship in the z axis.
         transform.Rotate(0, 0, -rotation * 5f);
 	}
+
+    /// <summary>
+    /// Method called once per frame. Let's play and stop the ship animation.
+    /// </summary>
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        {
+            shipAnimator.Play("ShipFlying");
+        }
+        else if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W))
+        {
+            shipAnimator.Play("ShipIdle");
+        }
+    }
 }

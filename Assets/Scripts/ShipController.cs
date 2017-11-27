@@ -6,6 +6,7 @@ public class ShipController : MonoBehaviour {
 
     private Rigidbody2D shipRigidBody2D;
     private Animator shipAnimator;
+    private AudioSource shipThrotleAudio;
 
     /// <summary>
     /// Starts the ship game processament.
@@ -14,6 +15,7 @@ public class ShipController : MonoBehaviour {
     {
         shipRigidBody2D = GetComponent<Rigidbody2D>();
         shipAnimator = GetComponent<Animator>();
+        shipThrotleAudio = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -43,8 +45,12 @@ public class ShipController : MonoBehaviour {
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
+            if (!shipThrotleAudio.isPlaying)
+            {
+                shipThrotleAudio.Play();
+            }
             shipAnimator.Play("ShipFlying");
         }
         else if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W))
